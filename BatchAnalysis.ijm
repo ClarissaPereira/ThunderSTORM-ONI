@@ -15,7 +15,7 @@ Lastly, the output table is exported as a .csv file to another folder 'Output' (
 indir = "D:/ThunderSTORM Analysis/Input/"; //directory where you need to add the files from the ONI experiment to be processed
 outdir = "D:/ThunderSTORM Analysis/Output/"; //directory where your thunderstorm spreadsheet will appear
 
-function tsanalyse (indir, outdir, filename) {
+function tsanalyse (indir, outdir, filename, offset0, offset1) {
 	image_name = indir + filename;
 	output_name = filename.replace("\\.tif","_");
 	output_path = outdir + output_name + "channel0.csv";
@@ -35,10 +35,14 @@ function tsanalyse (indir, outdir, filename) {
 	"sigma=true intensity=true chi2=true offset=true saveprotocol=true x=true y=true bkgstd=true id=false uncertainty=true frame=true");
 }
 
+setBatchMode("show")
+offset0 = getNumber("Enter offset value for channel 0:", 0.0);
+offset1 = getNumber("Enter offset value for channel 1:", 0.0);
 run("ROI Manager...");
 roiManager("Open", "C:/Users/trin3562/Desktop/ONI Channel Separation/channel0.roi");
 roiManager("Open", "C:/Users/trin3562/Desktop/ONI Channel Separation/channel1.roi");
+
 list = getFileList(indir)
 for (i=0; i < list.length; i++) {
-	tsanalyse(indir, outdir, list[i]);
+	tsanalyse(indir, outdir, list[i], offset0, offset1);
 }
