@@ -25,6 +25,7 @@ function tsanalyse (indir, outdir, filename) {
 	run("Run analysis", "filter=[Wavelet filter (B-Spline)] scale=2.0 order=3 detector=[Local maximum] connectivity=8-neighbourhood threshold=std(Wave.F1) estimator=[PSF: Integrated Gaussian] sigma=1.6 fitradius=3 method=[Weighted Least squares] full_image_fitting=false mfaenabled=false renderer=[Averaged shifted histograms] magnification=5.0 colorizez=false threed=false shifts=2 repaint=50");
 	run("Export results", "filepath=["+output_path+"] fileformat=[CSV (comma separated)] "+
 	"sigma=true intensity=true chi2=true offset=true saveprotocol=true x=true y=true bkgstd=true id=false uncertainty=true frame=true");
+}
 	
 list = getFileList(indir)
 for (i=0; i < list.length; i++) {
